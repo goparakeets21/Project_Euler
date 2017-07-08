@@ -14,27 +14,34 @@
  * @param  n an unsigned integer which we want to check if it is prime.
  * @return   true if the number is prime
  */
-bool isPrime(unsigned int n) {
+bool isPrime(unsigned int n)
+{
   unsigned int i;
-  for( i=2u; i*i<=n; i++) {
-    if(n % i == 0){
-      return false;
+
+  for (i = 2u; i * i <= n; i++)
+    {
+      if (n % i == 0)
+        {
+          return false;
+        }
     }
-  }
   return true;
 }
 
-int main(int argc, char const *argv[]) {
+int main(int argc, char const *argv[])
+{
   unsigned int count = 1;  //2 is prime, first number checked is 3
   unsigned int candidate = 1;
 
   //iterate until we reach the 10001st prime
-  while(count < limit) {
-    candidate += 2; //skip evens
-    if(true == isPrime(candidate)) {
-      count++;
+  while (count < limit)
+    {
+      candidate += 2; //skip evens
+      if (true == isPrime(candidate))
+        {
+          count++;
+        }
     }
-  }
 
   printf("%lld\n", candidate);
   return 0;
