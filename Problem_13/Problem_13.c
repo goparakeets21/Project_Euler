@@ -108,19 +108,29 @@ const char nums[100][50 + 1] = {
 
 int main(int argc, char const *argv[])
 {
+  char max_10[11] = "9999999999";
   mpz_t sum;
   mpz_t num;
+  mpz_t max_Value;
+  mpz_t ten;
   uint8_t i;
 
   mpz_init(sum);
-  gmp_printf("Zd\n", sum);
+  mpz_init(max_Value);
+  mpz_init(ten);
+  mpz_set_ui(ten, 10ul);
+  mpz_set_str(max_Value, max_10, 10);
 
   for (i = 0; i < 100; ++i)
     {
       mpz_init(num);
       mpz_set_str(num, nums[i], 10);
       mpz_add(sum, num, sum);
-      gmp_printf("%Zd\n", sum);
+    }
+
+  while (0 < mpz_cmp(sum, max_Value))
+    {
+      mpz_fdiv_q(sum, sum, ten);
     }
   gmp_printf("%Zd\n", sum);
   return 0;
