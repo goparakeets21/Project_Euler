@@ -16,7 +16,6 @@ uint64_t numberOfPaths(int x, int y)
       grid[0][i] = 1;
     }
 
-
   // Iterate over the table and gradually build up paths based on previous
   // solutions
   for (i = 1; i < x; i++)
