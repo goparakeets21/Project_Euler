@@ -9,17 +9,11 @@ uint64_t numberOfPaths(int x, int y)
   int i;
   int j;
 
-  // All paths for the first row is 1
+  // All paths for the first row and column is 1
   for (i = 0; i < x; i++)
     {
       grid[i][0] = 1;
-    }
-
-
-  // All paths for the first column is 1
-  for (j = 0; j < y; j++)
-    {
-      grid[0][j] = 1;
+      grid[0][i] = 1;
     }
 
 
@@ -29,6 +23,7 @@ uint64_t numberOfPaths(int x, int y)
     {
       for (j = 1; j < y; j++)
         {
+          //each vertex is the sum of the adjacent two
           grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
         }
     }
