@@ -33,35 +33,46 @@ char nums[] = "75 "
 
 int num[NUM_ELEMENTS] = { 0 };
 
-smartArray * maxPathTriangle(smartArray * nums)
+int maxPathTriangle(void)
 {
-    int        row   = NUM_ROWS;
-    int        i     = 0;
-    smartArray * res = malloc(sizeof(*res));
+    int row = NUM_ROWS;
+    int i   = 0;
+    int c;
+    int bytes;
+    char* input;
 
-    *(res->arr) = malloc(sizeof(*(res->arr)) * NUM_ROWS);
-    while (scanf("%d", &num[i++]) == 1)
+    input = nums;
+
+    //Parse the string, extracting the numbers out
+    while (sscanf(input, "%d%n", &c, &bytes) > 0)
     {
+        num[i++] = c;
+        input   += bytes;
     }
 
-    for (row = NUM_ROWS - 1; row > 0; i++)
+    //Iterate over the rows
+    for (row = NUM_ROWS - 1; row > 0; row--)
     {
         int start = (row * (row - 1) / 2);
         int end   = ((row - 1) * (row + 2) / 2);
         int j;
-        int max_Row = -1;
 
+        //For each element in each row, take the max
         for (j = start; j <= end; j++)
         {
-            int max_element = (num[j] > num[])
+            num[j] += (num[j + row] > num[j + row + 1]) ? \
+                      num[j + row]  : num[j + row + 1];
         }
     }
 
-    return res;
+    //return the last element (max)
+    return num[0];;
 }
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    int max = maxPathTriangle();
+
+    printf("%d\n", max);
     return 0;
 }
