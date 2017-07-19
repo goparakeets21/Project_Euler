@@ -1,10 +1,9 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-typedef struct smartArray
-{
-    int    * arr;
-    size_t size;
+typedef struct smartArray {
+  int    * arr;
+  size_t size;
 } smartArray;
 
 #ifndef NUM_ROWS
@@ -35,44 +34,44 @@ int num[NUM_ELEMENTS] = { 0 };
 
 int maxPathTriangle(void)
 {
-    int row = NUM_ROWS;
-    int i   = 0;
-    int c;
-    int bytes;
-    char* input;
+  int row = NUM_ROWS;
+  int i = 0;
+  int c;
+  int bytes;
+  char* input;
 
-    input = nums;
+  input = nums;
 
-    //Parse the string, extracting the numbers out
-    while (sscanf(input, "%d%n", &c, &bytes) > 0)
+  //Parse the string, extracting the numbers out
+  while (sscanf(input, "%d%n", &c, &bytes) > 0)
     {
-        num[i++] = c;
-        input   += bytes;
+      num[i++] = c;
+      input += bytes;
     }
 
-    //Iterate over the rows
-    for (row = NUM_ROWS - 1; row > 0; row--)
+  //Iterate over the rows
+  for (row = NUM_ROWS - 1; row > 0; row--)
     {
-        int start = (row * (row - 1) / 2);
-        int end   = ((row - 1) * (row + 2) / 2);
-        int j;
+      int start = (row * (row - 1) / 2);
+      int end = ((row - 1) * (row + 2) / 2);
+      int j;
 
-        //For each element in each row, take the max
-        for (j = start; j <= end; j++)
+      //For each element in each row, take the max
+      for (j = start; j <= end; j++)
         {
-            num[j] += (num[j + row] > num[j + row + 1]) ? \
-                      num[j + row]  : num[j + row + 1];
+          num[j] += (num[j + row] > num[j + row + 1]) ? \
+                    num[j + row]  : num[j + row + 1];
         }
     }
 
-    //return the last element (max)
-    return num[0];;
+  //return the last element (max)
+  return num[0];
 }
 
 int main(int argc, char const *argv[])
 {
-    int max = maxPathTriangle();
+  int max = maxPathTriangle();
 
-    printf("%d\n", max);
-    return 0;
+  printf("%d\n", max);
+  return 0;
 }
